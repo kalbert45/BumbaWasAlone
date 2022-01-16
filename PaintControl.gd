@@ -5,17 +5,22 @@ const IMAGE_SIZE = Vector2(256, 256)
 const BRUSH_SIZE = 2
 const BRUSH_COLOR = Color.black
 
+signal png_saved_signal
+
 var viewport_size = Vector2()
 
 # picture for use in model prediction
 var picture
+
+# center of image
+var img_center = Vector2()
 
 # A list to hold the dictionary that makes up the brush
 var brush_data_list = []
 
 #boolean to hold when drawing is active
 # and position of mouse when left click was pressed
-var is_drawing_active = true
+var is_drawing_active = false
 var last_mouse_pos = Vector2()
 
 #boolean to check if mouse is in window
@@ -45,7 +50,7 @@ func _process(delta):
 	
 	#for testing
 	if Input.is_action_just_pressed("ui_accept"):
-		get_picture()
+		#get_picture()
 		first_click = false
 		brush_data_list = []
 		update()
@@ -128,7 +133,7 @@ func _draw():
 				
 func get_picture():
 	yield(VisualServer, "frame_post_draw")
-	print('get picture called')
+	#print('get picture called')
 	#get viewport image from hidden canvas
 	var img = $ViewportContainer/Viewport.get_texture().get_data()
 	# unflip image (flipped by default)
@@ -139,4 +144,9 @@ func get_picture():
 	img_size.y = BR_node.global_position.y - TL_node.global_position.y
 	var cropped_img = img.get_rect(Rect2(TL_node.global_position, img_size))
 	
-	cropped_img.save_png('test.png')
+	#get center of image
+	img_center.x = (BR_node.global_position.x + TL_node.global_position.x)/2
+	img_center.y = (BR_node.global_position.y + TL_node.global_position.y)/2
+	
+	cropped_img.save_png('img.png')
+	emit_signal('png_saved_signal')

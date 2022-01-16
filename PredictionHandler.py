@@ -46,29 +46,29 @@ class PredictionHandler(Node2D):
 	
 	# if drawing is inactive, space activates. if active, space creates
 	# 28x28 image which model uses to predict top 5 classes
-	def _process(self, delta):
-		if Input.is_action_just_pressed("ui_accept"):
-			#paint_node = self.get_node('Paint/PaintControl')
-			#paint_node.get_picture()
-			test_image = Image.open('test.png')
-			# preprocess image to 26x26 b&w png
-			test_image = test_image.convert("L")
-			test_image = test_image.resize((26,26), resample=Image.LANCZOS)
-			test_image = test_image.point(lambda x: 0 if x < 230 else 255, '1')
-			# pad to 28x28
-			new_image = Image.new('1', (28,28), (255))
-			new_image.paste(test_image,((28-test_image.size[0])//2,(28-test_image.size[1])//2))
-			new_image = new_image.convert("L")
-			new_image.save('test4.png', format="png")
-			
-			#reshape data for model
-			data = asarray(new_image)
-			new_data = 1-(np.reshape(data, (1, 28, 28, 1)) / 255)
-			
-			#get top 5 class predictions
-			prediction = self.model.predict(new_data)
-			ind = (-prediction).argsort()
-			ind = ind[0][:5]
-			latex = [self.classes[x] for x in ind]
+	def predict(self):
+	
+		#paint_node = self.get_node('Paint/PaintControl')
+		#paint_node.get_picture()
+		test_image = Image.open('img.png')
+		# preprocess image to 26x26 b&w png
+		test_image = test_image.convert("L")
+		test_image = test_image.resize((26,26), resample=Image.LANCZOS)
+		test_image = test_image.point(lambda x: 0 if x < 230 else 255, '1')
+		# pad to 28x28
+		new_image = Image.new('1', (28,28), (255))
+		new_image.paste(test_image,((28-test_image.size[0])//2,(28-test_image.size[1])//2))
+		new_image = new_image.convert("L")
+		new_image.save('convertedimg.png', format="png")
+		
+		#reshape data for model
+		data = asarray(new_image)
+		new_data = 1-(np.reshape(data, (1, 28, 28, 1)) / 255)
+		
+		#get top 5 class predictions
+		prediction = self.model.predict(new_data)
+		ind = (-prediction).argsort()
+		ind = ind[0][:5]
+		latex = [self.classes[x] for x in ind]
 
-			print(latex)
+		return str(latex)
