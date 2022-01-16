@@ -8,6 +8,7 @@ var response_string
 var relevant_classes = []
 var drawing_location = Vector2()
 var is_drawing_active = false
+var is_there_sun = false
 
 onready var paint_handler = $Paint/PaintControl
 onready var prediction_handler = $Paint/PredictionHandler
@@ -15,7 +16,7 @@ onready var prediction_handler = $Paint/PredictionHandler
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	relevant_classes = ['sun','moon','mountain', 'tree','grass','fish','shark','star']
+	relevant_classes = ['sun','moon','mountain', 'tree','grass','fish','shark','star','bird', 'penguin']
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -70,8 +71,38 @@ func process_response():
 			print('nothing')
 		'sun':
 			if is_in_sky(drawing_location):
-				print('sun!')
+				if not is_there_sun:
+					create("res://Assets/Sprites/sun.png")
+					$Background.texture = load("res://Assets/Sprites/world1background.png")
+					$Ocean.texture = load("res://Assets/Sprites/world1ocean.png")
+					is_there_sun = true
 			else:
 				print('sun in wrong location')
+		'fish':
+			if not is_in_sky(drawing_location):
+				create("res://Assets/Sprites/fish.png")
+			else:
+				print('fish cant fly')
+		'shark':
+			if not is_in_sky(drawing_location):
+				create("res://Assets/Sprites/shark.png")
+			else:
+				print('sharks cant fly')
+		'bird':
+			if is_in_sky(drawing_location):
+				create("res://Assets/Sprites/bird.png")
+			else:
+				print('most birds dont swim')
+		'penguin':
+			if not is_in_sky(drawing_location):
+				create("res://Assets/Sprites/penguin.png")
+			else:
+				print('penguins dont fly')
 		_:
 			print('other')
+			
+func create(img_path):
+	var sprite = Sprite.new()
+	sprite.texture = load(img_path)
+	sprite.global_position = drawing_location
+	add_child(sprite)
