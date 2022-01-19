@@ -3,7 +3,7 @@ extends Control
 # image size normalized for CNN classification
 const IMAGE_SIZE = Vector2(256, 256)
 const BRUSH_SIZE = 2
-const BRUSH_COLOR = Color.black
+const BRUSH_COLOR = Color.white
 
 signal png_saved_signal
 
@@ -44,7 +44,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta): 
+func _process(_delta): 
 	#share brush list with ColorRect node
 	hidden_canvas.brush_data_list = brush_data_list
 	
@@ -142,6 +142,11 @@ func get_picture():
 	var img_size = Vector2()
 	img_size.x = BR_node.global_position.x - TL_node.global_position.x
 	img_size.y = BR_node.global_position.y - TL_node.global_position.y
+	# prevent 0 size image
+	if img_size.x == 0:
+		img_size.x = 1
+	if img_size.y == 0:
+		img_size.y = 1
 	var cropped_img = img.get_rect(Rect2(TL_node.global_position, img_size))
 	
 	#get center of image

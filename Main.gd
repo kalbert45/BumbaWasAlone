@@ -16,11 +16,13 @@ onready var prediction_handler = $Paint/PredictionHandler
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	relevant_classes = ['sun','moon','mountain', 'tree','grass','fish','shark','star','bird', 'penguin']
+	relevant_classes = ['sun','moon','mountain', 'tree','grass','fish','shark','star','bird', 
+	'penguin','bear','bee','duck','sea_turtle','whale']
+	$UnderwaterSound.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		if is_drawing_active:
 		
@@ -72,12 +74,14 @@ func process_response():
 		'sun':
 			if is_in_sky(drawing_location):
 				if not is_there_sun:
-					create("res://Assets/Sprites/sun.png")
-					$Background.texture = load("res://Assets/Sprites/world1background.png")
-					$Ocean.texture = load("res://Assets/Sprites/world1ocean.png")
+					#create sun
+					$Sun.global_position = drawing_location
+					$AnimationPlayer.play('world_change')
 					is_there_sun = true
 			else:
 				print('sun in wrong location')
+		'mountain':
+			print('mountain')
 		'fish':
 			if not is_in_sky(drawing_location):
 				create("res://Assets/Sprites/fish.png")
@@ -98,9 +102,20 @@ func process_response():
 				create("res://Assets/Sprites/penguin.png")
 			else:
 				print('penguins dont fly')
+		'sea_turtle':
+			if not is_in_sky(drawing_location):
+				create("res://Assets/Sprites/sea_turtle.png")
+			else:
+				print('turtles dont fly')
+		'whale':
+			if not is_in_sky(drawing_location):
+				create("res://Assets/Sprites/whale.png")
+			else:
+				print('whales in the sky?')
 		_:
 			print('other')
 			
+#handle creations!
 func create(img_path):
 	var sprite = Sprite.new()
 	sprite.texture = load(img_path)

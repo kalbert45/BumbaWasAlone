@@ -16,7 +16,7 @@ class PredictionHandler(Node2D):
 		Called every time the node is added to the scene.
 		Initialization here.
 		"""
-		self.model = load_model('doodleNet-model.h5')
+		self.model = load_model('model.h5')
 
 		# read class names
 		f = open("class_names.txt", "r")
