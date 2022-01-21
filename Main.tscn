@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Assets/Sprites/world0background.png" type="Texture" id=1]
 [ext_resource path="res://Bumba.tscn" type="PackedScene" id=2]
@@ -12,11 +12,33 @@
 [ext_resource path="res://Assets/Sounds/underwater.wav" type="AudioStream" id=10]
 [ext_resource path="res://Assets/Sprites/sun.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Sounds/sun_creation.wav" type="AudioStream" id=12]
+[ext_resource path="res://Assets/Sounds/bumbabgm.wav" type="AudioStream" id=13]
+[ext_resource path="res://Assets/Sounds/stormy_sea.wav" type="AudioStream" id=14]
+[ext_resource path="res://Assets/Sounds/world1_sea.wav" type="AudioStream" id=15]
+[ext_resource path="res://Menu.tscn" type="PackedScene" id=16]
+[ext_resource path="res://UIController.gd" type="Script" id=17]
+[ext_resource path="res://Assets/Fonts/Lato-Regular.ttf" type="DynamicFontData" id=18]
+[ext_resource path="res://SpriteHandler.gd" type="Script" id=19]
+[ext_resource path="res://HelpPopup.gd" type="Script" id=20]
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 18 )
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Ocean0:position:x")
+tracks/0/path = NodePath("SpriteHandler/Ocean0:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -25,35 +47,25 @@ tracks/0/keys = {
 "points": PoolRealArray( 640, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Ocean0:position:y")
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteHandler/Ocean0/Ocean1:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 360, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Ocean0/Ocean1:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("Background0/Background1:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteHandler/Background0/Background1:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -65,7 +77,7 @@ resource_name = "ocean_sway"
 length = 10.0
 loop = true
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Ocean0:position:x")
+tracks/0/path = NodePath("SpriteHandler/Ocean0:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -74,21 +86,11 @@ tracks/0/keys = {
 "points": PoolRealArray( 488.78, -0.3, 0, 2.3, 44.5805, 785.983, -1.6, 37.1505, 1.9, 14.8602, 488.78, -1.8, -22.2903, 1.2, 0 ),
 "times": PoolRealArray( 0, 5, 10 )
 }
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Ocean0:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 360, -0.25, 0, 0.25, 0, 360, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.3 )
-}
 
 [sub_resource type="Animation" id=3]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Ocean0/Ocean1:modulate")
+tracks/0/path = NodePath("SpriteHandler/Ocean0/Ocean1:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -100,7 +102,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Background0/Background1:modulate")
+tracks/1/path = NodePath("SpriteHandler/Background0/Background1:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -112,7 +114,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Ocean0:modulate")
+tracks/2/path = NodePath("SpriteHandler/Ocean0:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -124,7 +126,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0.8 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Ocean0:self_modulate")
+tracks/3/path = NodePath("SpriteHandler/Ocean0:self_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -136,7 +138,7 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 0.8 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sun:visible")
+tracks/4/path = NodePath("SpriteHandler/Sun:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -148,7 +150,7 @@ tracks/4/keys = {
 "values": [ false ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Sun:scale")
+tracks/5/path = NodePath("SpriteHandler/Sun:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -160,7 +162,7 @@ tracks/5/keys = {
 "values": [ Vector2( -0.3, -0.3 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Sun:self_modulate")
+tracks/6/path = NodePath("SpriteHandler/Sun:self_modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -219,48 +221,148 @@ tracks/10/keys = {
 "update": 0,
 "values": [ Color( 0.4, 0.4, 0.4, 1 ) ]
 }
+tracks/11/type = "value"
+tracks/11/path = NodePath("BGM:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("AbovewaterSound:volume_db")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -15.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("AbovewaterSound:playing")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("AbovewaterSound:stream")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 14 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("UIController/TimeButton:disabled")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("UIController/TimeButton:self_modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
-[sub_resource type="Animation" id=4]
-resource_name = "world_change"
-length = 6.0
+[sub_resource type="Animation" id=11]
+resource_name = "activate_time_button"
+length = 10.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Ocean0/Ocean1:modulate")
+tracks/0/path = NodePath("UIController/TimeButton:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 4, 6 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.8 ) ]
+"times": PoolRealArray( 0, 8.5, 8.6, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false, false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Background0/Background1:modulate")
+tracks/1/path = NodePath("UIController/TimeButton:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 4, 6 ),
+"times": PoolRealArray( 0, 8.5, 10 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "world_change"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteHandler/Ocean0/Ocean1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 4.5, 6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteHandler/Background0/Background1:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 4.5, 6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Ocean0:self_modulate")
+tracks/2/path = NodePath("SpriteHandler/Ocean0:self_modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 4, 6 ),
+"times": PoolRealArray( 4.5, 6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0.8 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sun:visible")
+tracks/3/path = NodePath("SpriteHandler/Sun:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -272,7 +374,7 @@ tracks/3/keys = {
 "values": [ false, true ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sun:scale")
+tracks/4/path = NodePath("SpriteHandler/Sun:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -284,13 +386,13 @@ tracks/4/keys = {
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( -0.3, -0.3 ), Vector2( 1, 1 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Sun:self_modulate")
+tracks/5/path = NodePath("SpriteHandler/Sun:self_modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 4, 6 ),
+"times": PoolRealArray( 4.5, 6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.948, 1, 0.74, 1 ) ]
@@ -326,10 +428,10 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 1.9, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 1.9, 2, 7.9, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ true, false ]
+"values": [ true, false, false, true ]
 }
 tracks/9/type = "value"
 tracks/9/path = NodePath("Bumba:modulate")
@@ -338,45 +440,144 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 4, 6 ),
+"times": PoolRealArray( 4.5, 6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 0.4, 0.4, 0.4, 1 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/10/type = "value"
+tracks/10/path = NodePath("BGM:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 7.5, 7.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, true ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("AbovewaterSound:volume_db")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -15.0, -30.0 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("AbovewaterSound:playing")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 1.9, 2, 7.9, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false, false ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("AbovewaterSound:stream")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 6.5, 6.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 14 ), ExtResource( 15 ) ]
+}
+
+[sub_resource type="DynamicFont" id=12]
+size = 20
+font_data = ExtResource( 18 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 24
+font_data = ExtResource( 18 )
 
 [node name="Main" type="Node2D"]
 z_index = -10
 script = ExtResource( 6 )
 
-[node name="TransitionHandler" parent="." instance=ExtResource( 7 )]
-pause_mode = 2
+[node name="Bumba" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.4, 0.4, 0.4, 1 )
+position = Vector2( 640, 272 )
+scale = Vector2( 2, 2 )
+z_index = 1
 
-[node name="Background0" type="Sprite" parent="."]
+[node name="SpriteHandler" type="Node2D" parent="."]
+pause_mode = 2
+script = ExtResource( 19 )
+
+[node name="Background0" type="Sprite" parent="SpriteHandler"]
 position = Vector2( 640, 360 )
 scale = Vector2( 4, 4 )
 z_index = -10
 texture = ExtResource( 1 )
 
-[node name="Background1" type="Sprite" parent="Background0"]
+[node name="Background1" type="Sprite" parent="SpriteHandler/Background0"]
 modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 8 )
 
-[node name="Bumba" parent="." instance=ExtResource( 2 )]
-modulate = Color( 0.4, 0.4, 0.4, 1 )
-position = Vector2( 640, 424 )
-scale = Vector2( 2, 2 )
-z_index = 1
-
-[node name="Ocean0" type="Sprite" parent="."]
+[node name="Ocean0" type="Sprite" parent="SpriteHandler"]
 modulate = Color( 1, 1, 1, 0.8 )
 self_modulate = Color( 1, 1, 1, 0.8 )
 position = Vector2( 640, 360 )
 z_index = 2
 texture = ExtResource( 3 )
 
-[node name="Ocean1" type="Sprite" parent="Ocean0"]
+[node name="Ocean1" type="Sprite" parent="SpriteHandler/Ocean0"]
 modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 9 )
+
+[node name="Sun" type="Sprite" parent="SpriteHandler"]
+visible = false
+position = Vector2( 608, 80 )
+rotation = 3.14159
+scale = Vector2( -0.3, -0.3 )
+z_index = -1
+texture = ExtResource( 11 )
+
+[node name="TemporaryThings" type="Node2D" parent="SpriteHandler"]
+
+[node name="UIController" type="CanvasLayer" parent="."]
+pause_mode = 2
+layer = 5
+script = ExtResource( 17 )
+
+[node name="Menu" parent="UIController" instance=ExtResource( 16 )]
+
+[node name="TransitionHandler" parent="UIController" instance=ExtResource( 7 )]
+pause_mode = 2
+
+[node name="TimeButton" type="Button" parent="UIController"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 1048.0
+margin_top = 648.0
+margin_right = 1263.0
+margin_bottom = 698.0
+focus_mode = 1
+mouse_filter = 2
+custom_colors/font_color_hover = Color( 0.501961, 0.501961, 0.501961, 1 )
+custom_colors/font_color_pressed = Color( 0.501961, 0.501961, 0.501961, 1 )
+custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
+enabled_focus_mode = 1
+text = "Let time pass..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Paint" parent="." instance=ExtResource( 4 )]
 
@@ -391,7 +592,9 @@ anims/RESET = SubResource( 1 )
 anims/ocean_sway = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+pause_mode = 2
 anims/RESET = SubResource( 3 )
+anims/activate_time_button = SubResource( 11 )
 anims/world_change = SubResource( 4 )
 
 [node name="UnderwaterSound" type="AudioStreamPlayer" parent="."]
@@ -400,11 +603,45 @@ stream = ExtResource( 10 )
 volume_db = -2.0
 pitch_scale = 0.6
 
-[node name="Sun" type="Sprite" parent="."]
-visible = false
-position = Vector2( 608, 80 )
-scale = Vector2( -0.3, -0.3 )
-texture = ExtResource( 11 )
-
 [node name="SunCreation" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 13 )
+volume_db = -2.0
+
+[node name="AbovewaterSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -15.0
+pitch_scale = 0.7
+
+[node name="HelpPopup" type="Node2D" parent="."]
+z_index = 10
+
+[node name="Popup" type="WindowDialog" parent="HelpPopup"]
+visible = true
+margin_left = 488.0
+margin_top = 120.0
+margin_right = 788.0
+margin_bottom = 620.0
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HelpPopup/Popup"]
+margin_left = 24.0
+margin_top = 48.0
+margin_right = 274.0
+margin_bottom = 488.0
+custom_fonts/normal_font = SubResource( 12 )
+text = "sun"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="HelpPopup/Popup"]
+margin_left = 24.0
+margin_top = 16.0
+margin_right = 274.0
+margin_bottom = 56.0
+custom_fonts/normal_font = SubResource( 13 )
+text = "Try drawing:"

@@ -15,6 +15,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+		
+	
 	# move bumba to mouse when not drawing
 	if not is_drawing:
 		mouse_pos = get_viewport().get_mouse_position()
@@ -27,5 +29,3 @@ func _process(_delta):
 		else:
 			sprite.play('touch', true)
 			is_drawing = false
-			
-	

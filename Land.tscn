@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Sprites/land.png" type="Texture" id=1]
+[ext_resource path="res://Land.gd" type="Script" id=2]
+
+[node name="Land" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 640, 360 )
+texture = ExtResource( 1 )
+
+[node name="DryLand" type="Polygon2D" parent="."]
+position = Vector2( 760, 288 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 0, -13.488, 427.999, -75.953, 390, 10.774, 519.206, 38.686, 520, 60.232, 30.661, 36.2, 4.257, 23.832 )
+
+[node name="AllLand" type="Polygon2D" parent="."]
+position = Vector2( 760, 296 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 0, 0, 15.601, 49.848, 3.374, 162.285, -375.474, 400, -759.309, 400, -760, 425.679, 522.319, 425, 522, -182.115, 421.015, -71.719 )

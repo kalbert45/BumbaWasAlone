@@ -4,18 +4,23 @@ extends Node
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+onready var animation_player = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# unpause whenever transition finishes
-	$AnimationPlayer.connect("animation_finished", self, "unpause")
+	animation_player.connect("animation_finished", self, "unpause")
 	
-	#when game starts, pause and show beginning text
+
+func beginning_transition():
 	get_tree().paused = true
+	animation_player.play('beginning_transition')
+	
+func dry_land_transition():
+	get_tree().paused = true
+	animation_player.play('dry_land_transition')
 
-
-func unpause(animation):
+func unpause(_animation):
 	print('unpause called')
 	get_tree().paused = false
 	

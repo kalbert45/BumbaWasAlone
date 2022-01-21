@@ -51,13 +51,20 @@ class PredictionHandler(Node2D):
 		#paint_node = self.get_node('Paint/PaintControl')
 		#paint_node.get_picture()
 		test_image = Image.open('img.png')
-		# preprocess image to 26x26 b&w png
+		# pad into square
+		width, height = test_image.size
+		max_dim = max(width,height)
+		pad_image = Image.new('1', (max_dim,max_dim), (255))
+		pad_image.paste(test_image,((max_dim-width)//2,(max_dim-height)//2))
+		test_image = pad_image
+		
+		# process image to 26x26 b&w png
 		test_image = test_image.convert("L")
-		test_image = test_image.resize((26,26), resample=Image.LANCZOS)
-		test_image = test_image.point(lambda x: 0 if x < 230 else 255, '1')
-		# pad to 28x28
+		test_image = test_image.resize((26,26), resample=Image.BILINEAR)
+		test_image = test_image.point(lambda x: 0 if x < 235 else 255, '1')
+		# pad again to 28x28
 		new_image = Image.new('1', (28,28), (255))
-		new_image.paste(test_image,((28-test_image.size[0])//2,(28-test_image.size[1])//2))
+		new_image.paste(test_image,(1,1))
 		new_image = new_image.convert("L")
 		new_image.save('convertedimg.png', format="png")
 		
